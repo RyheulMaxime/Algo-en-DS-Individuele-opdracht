@@ -1,19 +1,7 @@
 from flask_sqlalchemy import SQLAlchemy
-from flask_login import LoginManager, UserMixin, login_user, logout_user, login_required, current_user
+from flask_login import UserMixin
 
 db = SQLAlchemy()
-
-# class User(db.Model):
-#     id = db.Column(db.Integer, primary_key=True)
-#     username = db.Column(db.String(80), unique=True, nullable=False)
-#     # print("User created")
-
-#     # def __repr__(self):
-#     #     return f'<User {self.username}>'
-
-#     def to_dict(self):
-#         return {c.name: getattr(self, c.name) for c in self.__table__.columns}
-
 
 class Products(db.Model):
     productid = db.Column(db.Integer, primary_key=True)
@@ -23,8 +11,6 @@ class Products(db.Model):
     unit = db.Column(db.String(100), nullable=False)
     price = db.Column(db.Float, nullable=False)
     createdat = db.Column(db.String(100), nullable=False)
-
-    # user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
     
     def to_dict(self):
         return {c.name: getattr(self, c.name) for c in self.__table__.columns}
