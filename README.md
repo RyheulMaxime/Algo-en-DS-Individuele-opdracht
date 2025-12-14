@@ -3,10 +3,10 @@ Opdracht: You must create a small digital marketplace application with Flask tha
 
 
 # The comands used in the CLI
-env_Al_DS\Scripts\Activate.ps1
-deactivate
-pip install -r requirements.txt
-python .\run.py
+- env_Al_DS\Scripts\Activate.ps1
+- pip install -r requirements.txt
+- python .\run.py
+- deactivate
 
 # For login in:
 pasword is not required but if a user has a pasword the you kan not log in without it:

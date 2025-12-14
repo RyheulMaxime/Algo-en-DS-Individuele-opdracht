@@ -8,6 +8,8 @@ from sqlalchemy import inspect
 from .db import db
 from flask_login import LoginManager, UserMixin, login_user, logout_user, login_required, current_user
 
+SECRET_KEY = os.environ.get('SECRET_KEY') or 'dev_key_from_config_file'
+SQLALCHEMY_DATABASE_URI = os.environ.get('API_KEY')
 
 login_manager = LoginManager()
 
@@ -18,6 +20,9 @@ def create_app():
     # load the instance config, if it exists, when not testing
     # app.config.from_pyfile('config.py', silent=True)
 
+    # Instead of just reading a file, try to get it from the OS first
+    print(SECRET_KEY)
+    print(SQLALCHEMY_DATABASE_URI)
     app.config.from_object(Config)
     db.init_app(app)
 
