@@ -5,10 +5,12 @@ __pycache__/
 
 # eigen instance folder met config.py locaal om niet data database online te delen
 instance/
+.flaskr/config.py
 
 .pytest_cache/
 .coverage
 htmlcov/
+
 
 dist/
 build/

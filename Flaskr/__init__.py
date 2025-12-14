@@ -2,44 +2,37 @@ import os
 
 from flask import Flask
 from .config import Config
-from sqlalchemy import inspect
-# from logging.config import dictConfig
 
 from .db import db
-from flask_login import LoginManager, UserMixin, login_user, logout_user, login_required, current_user
+from flask_login import LoginManager
 
-SECRET_KEY = os.environ.get('SECRET_KEY') or 'dev_key_from_config_file'
-SQLALCHEMY_DATABASE_URI = os.environ.get('API_KEY')
 
 login_manager = LoginManager()
 
 def create_app():
     # create and configure the app
-    app = Flask(__name__, instance_relative_config=False)
+    app = Flask(__name__, instance_relative_config=True)
 
-    # load the instance config, if it exists, when not testing
-    # app.config.from_pyfile('config.py', silent=True)
-
-    # Instead of just reading a file, try to get it from the OS first
-    print(SECRET_KEY)
-    print(SQLALCHEMY_DATABASE_URI)
+    # 2. Load the default configuration (The Env Vars from Step 1)
     app.config.from_object(Config)
+
+    # 3. Try to load 'config_local.py' from the instance folder.
+    #    silent=True means: "If this file is missing (like on Render), just ignore it."
+    #    If the file exists (locally), it overwrites the variables from Step 2.
+    app.config.from_pyfile('config.py', silent=True)
+
+    # 4. Initialize the database
     db.init_app(app)
 
+    # 5. Initialize the login manager
     login_manager.init_app(app)
     login_manager.login_view = "login"
 
-    # ensure the instance folder exists
-    # try:
-    #     os.makedirs(app.instance_path)
-    # except OSError:
-    #     pass
-
+    # 6. Register the blueprints
     from .routes import main
     app.register_blueprint(main)
     
     
     return app
 
-# app = create_app()
 
