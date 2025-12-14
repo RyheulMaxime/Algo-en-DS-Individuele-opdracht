@@ -63,11 +63,6 @@ def get_current_user():
 # /////////////////////////////////////////////////
 @main.route('/', methods=['GET'])
 def index():
-    # Test Yahoo Finance for another user  
-    stock = yf.Ticker("NVDA")
-    # print(stock.info)
-
-
     error=request.args.get('error')
     confirmation=request.args.get('confirmation')
     user = get_current_user()
@@ -75,7 +70,7 @@ def index():
     products = get_products(sorting_system)
     if products is None:
         return render_template('index.html', customer=user, products=products, sorting_system=sorting_system, error="Products could not be loaded form database.")
-    return render_template('index.html', customer=user, products=products, sorting_system=sorting_system, error=error, confirmation=confirmation, stock=stock)
+    return render_template('index.html', customer=user, products=products, sorting_system=sorting_system, error=error, confirmation=confirmation)
 
 @main.route('/product', methods=['GET', 'POST'])
 def product(product_id=None):
