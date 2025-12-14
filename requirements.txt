@@ -6,3 +6,5 @@ psycopg2-binary
 flask_login 
 werkzeug
 gunicorn
+# test for other students
+yfinance
