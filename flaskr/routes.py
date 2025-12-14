@@ -1,12 +1,9 @@
-from flask import Blueprint, request, redirect, url_for, render_template, session, logging
+from flask import Blueprint, request, redirect, url_for, render_template
 from .db import *
-from logging.config import dictConfig
-# from flask import current_app
 from . import login_manager   # import login_manager from the app package
 from flask_login import login_user, logout_user, login_required, current_user
 from werkzeug.security import generate_password_hash, check_password_hash
 from datetime import datetime
-import yfinance as yf
 
 main = Blueprint('main', __name__)
 
