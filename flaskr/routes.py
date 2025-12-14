@@ -1,11 +1,12 @@
 from flask import Blueprint, request, redirect, url_for, render_template, session, logging
 from .db import *
 from logging.config import dictConfig
-from flask import current_app
+# from flask import current_app
 from . import login_manager   # import login_manager from the app package
-from flask_login import LoginManager, UserMixin, login_user, logout_user, login_required, current_user
+from flask_login import login_user, logout_user, login_required, current_user
 from werkzeug.security import generate_password_hash, check_password_hash
 from datetime import datetime
+import yfinance as yf
 
 main = Blueprint('main', __name__)
 
@@ -62,6 +63,11 @@ def get_current_user():
 # /////////////////////////////////////////////////
 @main.route('/', methods=['GET'])
 def index():
+    # Test Yahoo Finance for another user  
+    stock = yf.Ticker("NVDA")
+    # print(stock.info)
+
+
     error=request.args.get('error')
     confirmation=request.args.get('confirmation')
     user = get_current_user()
@@ -69,7 +75,7 @@ def index():
     products = get_products(sorting_system)
     if products is None:
         return render_template('index.html', customer=user, products=products, sorting_system=sorting_system, error="Products could not be loaded form database.")
-    return render_template('index.html', customer=user, products=products, sorting_system=sorting_system, error=error, confirmation=confirmation)
+    return render_template('index.html', customer=user, products=products, sorting_system=sorting_system, error=error, confirmation=confirmation, stock=stock)
 
 @main.route('/product', methods=['GET', 'POST'])
 def product(product_id=None):
