@@ -15,7 +15,6 @@ class Products(db.Model):
     def to_dict(self):
         return {c.name: getattr(self, c.name) for c in self.__table__.columns}
 
-
 class Categories(db.Model):
     categoryid = db.Column(db.Integer, primary_key=True)
     categoryname = db.Column(db.String(100), primary_key=False)
