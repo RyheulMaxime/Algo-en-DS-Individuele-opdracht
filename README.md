@@ -1,7 +1,7 @@
 # Algo-en-DS-Individuele-opdracht
 Opdracht: You must create a small digital marketplace application with Flask that connects to an existing MySQL database. <br />
  <br />
-A video showing the application can be found in the documents folder.
+A video showing the application can be found using this link: [Video Webshop] (https://drive.google.com/file/d/1jWP6cYCMeHMiJQBNY8B2OHr21kmLlSAD/view?usp=sharing).
 
 
 ## The comands used in the CLI
