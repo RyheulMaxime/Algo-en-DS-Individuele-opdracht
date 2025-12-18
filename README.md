@@ -3,9 +3,13 @@ Opdracht: You must create a small digital marketplace application with Flask tha
 
 
 # The comands used in the CLI
-- env_Al_DS\Scripts\Activate.ps1
+first create an instance folder in the root folder of the repository, then place the local config.py file in that root folder. If the configs are not provided in the environment, what happens with Render, then flask will look at the configs in that folder.
+
 - pip install -r requirements.txt
 - python .\run.py
+
+If you are using an environment:
+- [Environment name]\Scripts\Activate.ps1
 - deactivate
 
 # For login in:
@@ -19,3 +23,7 @@ Some users that do not have a pasword instaled:
 - LINO-Delicateses
 - Pericles Comidas clásicas
 - Toms Spezialitäten
+
+# Link to render page:
+https://algo-en-ds-individuele-opdracht.onrender.com/
+

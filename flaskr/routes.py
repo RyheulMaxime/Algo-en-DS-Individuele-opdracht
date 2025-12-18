@@ -79,13 +79,18 @@ def product(product_id=None):
     if request.method == "POST":
         quantity = request.form.get('quantity')
         if current_user.is_authenticated:
-            new_order_id = Orders.query.order_by(Orders.orderid.desc()).first().orderid + 1
             customer_id = current_user.customerid
+
+            # add new order for a customer
+            new_order_id = Orders.query.order_by(Orders.orderid.desc()).first().orderid + 1
             new_order = Orders(orderid = new_order_id, customerid=customer_id, orderdate=datetime.today().strftime('%Y-%m-%d'), employeeid=None, shipperid=None, delivered=False, createdat=datetime.today().strftime('%Y-%m-%d %H:%M:%S'))
             db.session.add(new_order)
+
+            # link new order to product
             new_order_details_id = OrderDetails.query.order_by(OrderDetails.orderdetailid.desc()).first().orderdetailid + 1
             new_order_details = OrderDetails(orderdetailid = new_order_details_id, orderid=new_order_id, productid=product_id, quantity=quantity, createdat=datetime.today().strftime('%Y-%m-%d %H:%M:%S'))
             db.session.add(new_order_details)
+            
             db.session.commit()
             return redirect(url_for('main.index', confirmation="Order placed"))
         return redirect(url_for('main.index', error="You are not logged in."))
@@ -234,35 +239,3 @@ def delete_order(order_detail_id):
     OrderDetails.query.filter(OrderDetails.orderdetailid == order_detail_id).delete()
     db.session.commit()
     return redirect(url_for("main.customer", notice="Order deleted"))
-
-# TODO: disable database get
-# Test database and check connection
-@main.route('/database/', methods=['GET'])
-def database():
-    table = request.args.get('table')
-    if table is None:
-        pass
-    elif table == 'categories':
-        categorties = Categories.query.all()
-        return {"categories": [c.to_dict() for c in categorties]}
-    elif table == 'customers':
-        customers = Customers.query.all()
-        return {"customers": [c.to_dict() for c in customers]}
-    elif table == 'employees':
-        pass
-    elif table == 'orderdetails':
-        order_details = OrderDetails.query.all()
-        return {"order_details": [od.to_dict() for od in order_details]}
-    elif table == 'orders':
-        orders = Orders.query.all()
-        return {"orders": [o.to_dict() for o in orders]}
-    elif table == 'products':
-        products = Products.query.all()
-        # return {"products": [p.productname for p in products]}
-        return {"products": [p.to_dict() for p in products]}
-    elif table == 'shippers':
-        pass
-    elif table == 'suppliers':
-        suppliers = Suppliers.query.all()
-        return {"suppliers": [s.to_dict() for s in suppliers]}   
-
