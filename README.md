@@ -1,5 +1,5 @@
 # Algo-en-DS-Individuele-opdracht
-Opdracht: You must create a small digital marketplace application with Flask that connects to an existing MySQL database.
+Opdracht: You must create a small digital marketplace application with Flask that connects to an existing MySQL database.<br />
 A video showing the application can be found using this link: [Video Webshop](https://drive.google.com/file/d/1jWP6cYCMeHMiJQBNY8B2OHr21kmLlSAD/view?usp=sharing).
 
 # The comands used in the CLI
@@ -13,7 +13,7 @@ If you are using an environment:
 - deactivate
 
 # For login in:
-Pasword is not required to make an account or to log in to an account without password. However if a user has a pasword the you kan not login without it:\n
+Pasword is not required to make an account or to log in to an account without password. However if a user has a pasword the you kan not login without it: <br />
 Some users that do not have a pasword instaled:
 - Alfreds Futterkiste
 - Ana Trujillo Emparedados y helados
